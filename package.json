@@ -1,0 +1,40 @@
+{
+  "name": "nightstand-monitor",
+  "version": "1.0.0",
+  "description": "Running on a Raspberry Pi this application gives you a morning briefing while you still lay in bed",
+  "author": "Marius Runde <marius.runde@uni-muenster.de> (http://mariusrunde.de)",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrunde/NightstandMonitor.git"
+  },
+  "keywords": [
+    "raspberry-pi"
+  ],
+  "bugs": {
+    "url": "https://github.com/mrunde/NightstandMonitor/issues"
+  },
+  "homepage": "https://github.com/mrunde/NightstandMonitor#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.15.2",
+    "jquery": "^3.1.1",
+    "react": "^15.4.2",
+    "react-bootstrap": "^0.30.8",
+    "react-dom": "^15.4.2",
+    "react-fontawesome": "^1.5.0",
+    "react-weathericons": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.1.0",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

@@ -76,9 +76,9 @@ gulp.task('bundle_jsx', ['copy_bower_components'], function() {
 // Default gulp task to start the toolchain
 gulp.task('default', ['bundle_jsx']);
 
-// --------------------------------------------------
+// -----------------------------------------------------------------------------
 // Gulp Tasks without Dependencies
-// --------------------------------------------------
+// -----------------------------------------------------------------------------
 
 // Copy the CSS files into the dist directory
 gulp.task('quick_copy_css', function () {

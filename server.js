@@ -33,6 +33,7 @@ const config = require('./config');
 
 // Required modules
 const colors = require('colors');
+const exec = require('child_process').exec;
 const express = require('express');
 const path = require('path');
 
@@ -55,7 +56,6 @@ console.log('############################################################\n');
 console.log('\n////////////////////////////////////////////////////////////\n');
 console.log('               STARTING SERVER...'.cyan);
 console.log('\n////////////////////////////////////////////////////////////\n');
-console.log('\n------------------------------------------------------------');
 
 // -----------------------------------------------------------------------------
 // Express Web Server
@@ -67,7 +67,36 @@ app.use(express.static(path.join(__dirname, '/dist')));
 
 // Start the web server
 var server = app.listen(config.EXPRESS_PORT, function() {
-  let port = config.EXPRESS_PORT.toString();
-  console.log('  Express server listening on port', port.cyan);
-  console.log('------------------------------------------------------------');
+  const port = config.EXPRESS_PORT.toString();
+  console.log('\n  Express server listening on port', port.cyan);
+  console.log('\n------------------------------------------------------------');
 });
+
+// -----------------------------------------------------------------------------
+// Start Scripts in Production
+// -----------------------------------------------------------------------------
+
+// Read the arguments from the command line
+const production = process.argv[2] || null;
+
+if (production === 'production') {
+  console.log('\n////////////////////////////////////////////////////////////\n');
+  console.log('               STARTING SCRIPTS...'.cyan);
+  console.log('\n////////////////////////////////////////////////////////////\n');
+
+  const PATH_TO_SCRIPTS = '/' + __dirname + '/src/scripts';
+
+  // Turn off the green LED of the Pi
+//  console.log('\n  Turning off LED...');
+//  exec('echo 0 >/sys/class/leds/led0/brightness');
+
+  // Control the touchscreen's backlight
+  const touchscreenControlScript = PATH_TO_SCRIPTS + '/touchscreenControl.py';
+  console.log('\n  Starting touchscreen control...');
+  exec('sudo python ' + touchscreenControlScript);
+
+  // Open the application with the Chromium browser in kiosk mode
+  const url = config.EXPRESS_HOST + ':' + config.EXPRESS_PORT;
+  console.log('\n  Starting browser and opening application...');
+  exec('chromium-browser --noerrdialogs --incognito --kiosk ' + url);
+}

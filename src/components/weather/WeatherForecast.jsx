@@ -26,7 +26,6 @@
 
 // Required components
 import React from 'react';
-import { Row, Image } from 'react-bootstrap';
 import WeatherIcons from 'react-weathericons';
 
 // WeatherForecast
@@ -34,33 +33,30 @@ class WeatherForecast extends React.Component {
   
   // Render the component
   render() {
-    const { forecastWeather } = this.props;
+    const { forecastWeather, index } = this.props;
+    const date = new Date(forecastWeather.date * 1000);
 
     return(
-      <h3>
-        <Row>
-          <small>
-            { forecastWeather.time }
-          </small>
-        </Row>
-        <Row>
-          <Image
-            className='background-white'
-            src={ forecastWeather.icon }
-            circle
-            />
-          <br/>
-        </Row>
-        <Row>
-          { forecastWeather.temp }<WeatherIcons name='celsius' />
-        </Row>
-      </h3>
+      <div className={'weather-forecast-' + index }>
+        <WeatherIcons
+          className='weather-forecast-icon'
+          name={ 'owm-day-' + forecastWeather.id }
+          />
+        <div className='weather-forecast-date'>
+          { date.getDate() + '.' + (date.getMonth() + 1) + '.' }
+        </div>
+        <div className='weather-forecast-temp'>
+          { forecastWeather.tempMax } / { forecastWeather.tempMin }
+          <WeatherIcons name='celsius' />
+        </div>
+      </div>
     );
   }
 };
 
 WeatherForecast.propTypes = {
-  forecastWeather: React.PropTypes.object.isRequired
+  forecastWeather: React.PropTypes.object.isRequired,
+  index: React.PropTypes.number.isRequired
 };
 
 export default WeatherForecast;

@@ -42,37 +42,19 @@ class NightstandMonitor extends React.Component {
 
     return(
       <div>
-        <div className='component component-top component-left'>
-          <div className='panel panel-default'>
-            <div className='panel-body'>
-              <Clock />
-            </div>
-          </div>
-        </div>
-        <div className='component component-top component-right'>
-          <div className='panel panel-default'>
-            <div className='panel-body'>
-              <Welcome name={ config.USER } />
-            </div>
-          </div>
-        </div>
-        <div className='component component-bottom component-left'>
-          <div className='panel panel-default'>
-            <div className='panel-body'>
-              <Weather
-                apiKey={ config.WEATHER_API_KEY }
-                location={ config.WEATHER_LOCATION }
-                />
-            </div>
-          </div>
-        </div>
-        <div className='component component-bottom component-right'>
-          <div className='panel panel-default'>
-            <div className='panel-body'>
-              <Webradio stations={ config.WEBRADIO_STATIONS } />
-            </div>
-          </div>
-        </div>
+        <Welcome name={ config.USER } />
+        <Clock />
+        <Weather
+          apiKey={ config.WEATHER_API_KEY }
+          location={ config.WEATHER_LOCATION }
+          />
+        <Webradio
+          stations={ config.WEBRADIO_STATIONS }
+          wakeUpDuration={ config.WEBRADIO_WAKEUP_DURATION }
+          wakeUpTimeHours={ config.WEBRADIO_WAKEUP_TIME_HOURS }
+          wakeUpTimeMinutes={ config.WEBRADIO_WAKEUP_TIME_MINUTES }
+          wakeUpTimeWeekdays={ config.WEBRADIO_WAKEUP_WEEKDAYS }
+          />
       </div>
     );
   }

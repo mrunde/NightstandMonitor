@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<!--
+/*
 The MIT License
 
 Copyright 2017 Marius Runde.
@@ -21,25 +20,65 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
--->
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+*/
 
-    <title>Nightstand Monitor</title>
+.webradio-alarm {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 270px;
+  width: 150px;
+  border-left: 1px solid #fff;
+}
 
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="lib/weather-icons/css/weather-icons.min.css">
-    <link rel="stylesheet" href="bundle.css">
-    <style>
-      body {
-        background-color: #000;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="bundle.js"></script>
-  </body>
-</html>
+.webradio-alarm-active-button {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  height: 60px;
+  width: 60px;
+}
+
+.webradio-alarm-active-button-disabled {
+  color: #f00;
+}
+
+.webradio-alarm-hours, .webradio-alarm-minutes {
+  position: absolute;
+  right: 50px;
+  height: 30px;
+  width: 50px;
+
+  font-size: 28px;
+}
+
+.webradio-alarm-hours {
+  top: 110px;
+}
+
+.webradio-alarm-minutes {
+  top: 190px;
+}
+
+.webradio-alarm-hours-minus, .webradio-alarm-hours-plus,
+.webradio-alarm-minutes-minus, .webradio-alarm-minutes-plus {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+}
+
+.webradio-alarm-hours-minus, .webradio-alarm-hours-plus {
+  top: 115px;
+}
+
+.webradio-alarm-minutes-minus, .webradio-alarm-minutes-plus {
+  top: 195px;
+}
+
+.webradio-alarm-hours-minus, .webradio-alarm-minutes-minus {
+  right: 100px;
+}
+
+.webradio-alarm-hours-plus, .webradio-alarm-minutes-plus {
+  right: 20px;
+}

@@ -36,7 +36,9 @@ class Clock extends React.Component {
     this.setTime = this.setTime.bind(this);
 
     this.state = {
-      time: null
+      hours: null,
+      minutes: null,
+      seconds: null
     };
   }
 
@@ -59,18 +61,35 @@ class Clock extends React.Component {
 
   // Set the time
   setTime() {
-    var currentDate = new Date();
+    let now = new Date();
+    let minutes = now.getMinutes();
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    let seconds = now.getSeconds();
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+
     this.setState({
-      time: currentDate.toLocaleTimeString()
+      hours: now.getHours(),
+      minutes,
+      seconds
     });
   }
 
   // Render the component
   render() {
+    const { hours, minutes, seconds } = this.state;
+
     return(
-      <h1>
-        { this.state.time }
-      </h1>
+      <div className='clock'>
+        <span className='clock-hours'>{ hours }</span>
+        <span className='clock-seperator-minutes'>:</span>
+        <span className='clock-minutes'>{ minutes }</span>
+        <span className='clock-seperator-seconds'>:</span>
+        <span className='clock-seconds'>{ seconds }</span>
+      </div>
     );
   }
 };

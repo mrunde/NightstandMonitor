@@ -11,7 +11,6 @@
   ],
   "homepage": "https://github.com/mrunde/NightstandMonitor",
   "dependencies": {
-    "bootstrap-css": "^3.3.7",
     "font-awesome": "^4.7.0",
     "weather-icons": "^2.0.10"
   }

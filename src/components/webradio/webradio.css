@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<!--
+/*
 The MIT License
 
 Copyright 2017 Marius Runde.
@@ -21,25 +20,49 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
--->
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+*/
 
-    <title>Nightstand Monitor</title>
+.webradio {
+  position: fixed;
+  top: 180px;
+  right: 30px;
+  height: 270px;
+  width: 350px;
+  border: 1px solid #fff;
 
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="lib/weather-icons/css/weather-icons.min.css">
-    <link rel="stylesheet" href="bundle.css">
-    <style>
-      body {
-        background-color: #000;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="bundle.js"></script>
-  </body>
-</html>
+  text-align: center;
+  color: #fff;
+}
+
+.webradio-active-station {
+  position: absolute;
+  top: 15px;
+  right: 160px;
+  height: 60px;
+  width: 180px;
+
+  font-size: 24px;
+}
+
+.webradio-play-button {
+  position: absolute;
+  top: 100px;
+  right: 220px;
+  height: 70px;
+  width: 60px;
+}
+
+.webradio-station-icons {
+  position: absolute;
+  bottom: 15px;
+  right: 175px;
+  height: 40px;
+  width: 150px;
+}
+
+.webradio-station-icon {
+  display: inline;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+}

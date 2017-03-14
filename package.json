@@ -23,7 +23,6 @@
     "express": "^4.15.2",
     "jquery": "^3.1.1",
     "react": "^15.4.2",
-    "react-bootstrap": "^0.30.8",
     "react-dom": "^15.4.2",
     "react-fontawesome": "^1.5.0",
     "react-weathericons": "^1.0.3"
@@ -35,6 +34,7 @@
     "browserify": "^14.1.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
+    "gulp-concat-css": "^2.3.0",
     "vinyl-source-stream": "^1.1.0"
   }
 }

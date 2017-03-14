@@ -24,11 +24,43 @@
 
 'use strict';
 
-// Customized OpenWeatherMap URLs to request current and forecast weather data
-const CURRENT_WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather?units=metric&q=';
-const FORECAST_WEATHER_URL = 'http://api.openweathermap.org/data/2.5/forecast/daily?cnt=7&units=metric&q=';
+// Required modules
+import React from 'react';
 
-module.exports = {
-  CURRENT_WEATHER_URL,
-  FORECAST_WEATHER_URL
+// WebradioIcon
+class WebradioIcon extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  // Change the active webradio station
+  onClick() {
+    const { index } = this.props;
+
+    this.props.onClick(index);
+  }
+
+  // Render the component
+  render() {
+    const { icon } = this.props;
+
+    return(
+      <img
+        className='webradio-station-icon'
+        src={ icon }
+        onClick={ this.onClick }
+        />
+    );
+  }
+}
+
+WebradioIcon.propTypes = {
+  icon: React.PropTypes.string.isRequired,
+  index: React.PropTypes.number.isRequired,
+  onClick: React.PropTypes.func.isRequired
 };
+
+export default WebradioIcon;

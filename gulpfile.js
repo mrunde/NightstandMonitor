@@ -33,6 +33,7 @@ const babelify = require('babelify');
 const browserify = require('browserify');
 const gulp = require('gulp');
 const clean = require('gulp-clean');
+const concatCss = require('gulp-concat-css');
 const source = require('vinyl-source-stream');
 
 // -----------------------------------------------------------------------------
@@ -45,17 +46,21 @@ gulp.task('clean', function() {
       .pipe(clean());
 });
 
-// Copy the HTML and CSS files into the dist directory
-gulp.task('copy_html_css', ['clean'], function() {
-  return gulp.src([
-    'src/index.html',
-    'src/style.css'
-  ])
+// Copy the HTML file into the dist directory
+gulp.task('copy_html', ['clean'], function() {
+  return gulp.src(['src/index.html'])
+      .pipe(gulp.dest('dist'));
+});
+
+// Bundle the CSS files
+gulp.task('bundle_css', ['copy_html'], function() {
+  return gulp.src('src/**/*.css')
+      .pipe(concatCss('bundle.css'))
       .pipe(gulp.dest('dist'));
 });
 
 // Copy the bower components into the dist/lib directory
-gulp.task('copy_bower_components', ['copy_html_css'], function() {
+gulp.task('copy_bower_components', ['bundle_css'], function() {
   return gulp.src(['bower_components/**/*'])
       .pipe(gulp.dest('dist/lib'));
 });
@@ -80,8 +85,9 @@ gulp.task('default', ['bundle_jsx']);
 // Gulp Tasks without Dependencies
 // -----------------------------------------------------------------------------
 
-// Copy the CSS files into the dist directory
-gulp.task('quick_copy_css', function () {
-  return gulp.src(['src/style.css'])
+// Update the CSS file in the dist directory
+gulp.task('update_style', function() {
+  return gulp.src('src/**/*.css')
+      .pipe(concatCss('bundle.css'))
       .pipe(gulp.dest('dist'));
 });

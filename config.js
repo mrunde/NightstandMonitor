@@ -38,10 +38,14 @@ module.exports = {
   WEATHER_LOCATION: 'YOUR_LOCATION',
   // Webradio stations
   WEBRADIO_STATIONS: [
+    // Example entry
     {
-      name: 'YOUR_STATION_NAME',
-      icon: 'YOUR_STATION_ICON',
-      url: 'YOUR_STATION_URL'
+      name: 'Rockantenne Bayern',
+      icon: 'http://www.antenne.de/assets/tpl/antenne-de/img/logo-antenne-de-header.svg',
+      url: 'http://mp3channels.webradio.antenne.de/rockantenne'
     }
-  ]
+  ],
+  WEBRADIO_WAKEUP_TIME_HOURS: 8,
+  WEBRADIO_WAKEUP_TIME_MINUTES: 0,
+  WEBRADIO_WAKEUP_WEEKDAYS: [1,2,3,4,5]
 };

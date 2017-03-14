@@ -22,48 +22,74 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-body {
-    background-color: #000;
+.weather {
+  position: fixed;
+  top: 120px;
+  left: 30px;
+  height: 340px;
+  width: 360px;
+
+  color: #fff;
 }
 
-.component {
-    position: absolute;
-    height: 220px;
-    width: 370px;
+.weather-temp {
+  position:absolute;
+  top: 5px;
+  left: 0px;
+  height: 115px;
+  width: 180px;
 }
 
-.component-top {
-    top: 10px;
+.weather-temp-value {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 80px;
+  width: 120px;
+
+  font-size: 84px;
+  text-align: right;
 }
 
-.component-bottom {
-    top: 180px;
+.weather-temp-celsius {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 50px;
+  width: 30px;
+
+  font-size: 42px;
 }
 
-.component-left {
-    left: 10px;
+.weather-icon {
+  position: absolute;
+  top: 0px;
+  right: 30px;
+  height: 140px;
+  width: 140px;
+
+  font-size: 90px;
 }
 
-.component-right {
-    right: 10px;
+.weather-description {
+  position: absolute;
+  top: 120px;
+  left: 30px;
+  height: 40px;
+  width: 300px;
+
+  font-size: 36px;
+  text-align: center;
 }
 
-.panel, .panel-default {
-    background-color: #000;
-    color: #fff;
-    border-color: #000;
-    text-align: center;
-}
+.weather-location {
+  position: absolute;
+  bottom: 0px;
+  left: 100px;
+  height: 16px;
+  width: 160px;
 
-h1 {
-    font-size: 42px;
-    padding: 5px;
-}
-
-h3 small {
-    color: #bbb;
-}
-
-.background-white {
-    background-color: #fff;
+  color: #ccc;
+  font-size: 14px;
+  text-align: center;
 }

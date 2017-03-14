@@ -26,7 +26,6 @@
 
 // Required modules
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
 import WeatherIcons from 'react-weathericons';
 import jquery from 'jquery';
 
@@ -34,11 +33,7 @@ import jquery from 'jquery';
 import WeatherForecast from './WeatherForecast';
 
 // Required constants
-import {
-  CURRENT_WEATHER_URL,
-  FORECAST_WEATHER_URL,
-  WEATHER_ICON_URL
-} from './constants';
+import { CURRENT_WEATHER_URL, FORECAST_WEATHER_URL } from './constants';
 
 // Weather
 class Weather extends React.Component {
@@ -50,100 +45,9 @@ class Weather extends React.Component {
     this.loadForecastWeather = this.loadForecastWeather.bind(this);
 
     this.state = {
-      currentWeather: {
-        temp: null,
-        humidity: null
-      },
-      forecastWeather: {
-        inOneHour: {
-          time: null,
-          icon: null,
-          temp: null
-        },
-        inThreeHours: {
-          time: null,
-          icon: null,
-          temp: null
-        },
-        inSixHours: {
-          time: null,
-          icon: null,
-          temp: null
-        }
-      }
+      currentWeather: new Object(),
+      forecastWeather: []
     };
-  }
-
-  // Load the current weather
-  loadCurrentWeather() {
-    const { apiKey, location } = this.props;
-    const url = CURRENT_WEATHER_URL + location + '&APPID=' + apiKey;
-
-    jquery.get({
-      url: url,
-      success: function(res) {
-        if (res) {
-          this.setState({
-            currentWeather: {
-              temp: this.transformTempInCelsius(res.main.temp),
-              humidity: res.main.humidity
-            }
-          });
-        }
-      }.bind(this)
-    });
-  }
-
-  // Load the forecast weather
-  loadForecastWeather() {
-    const { apiKey, location } = this.props;
-    const url = FORECAST_WEATHER_URL + location + '&APPID=' + apiKey;
-
-    jquery.get({
-      url: url,
-      success: function(res) {
-        if (res) {
-          var inOneHourObj = res.list[0];
-          var inOneHour = {
-            time: inOneHourObj.dt_txt.split(' ')[1].substr(0, 5),
-            icon: this.getWeatherIconUrl(inOneHourObj.weather[0].icon),
-            temp: this.transformTempInCelsius(inOneHourObj.main.temp)
-          };
-          
-          var inThreeHoursObj = res.list[1];
-          var inThreeHours = {
-            time: inThreeHoursObj.dt_txt.split(' ')[1].substr(0, 5),
-            icon: this.getWeatherIconUrl(inThreeHoursObj.weather[0].icon),
-            temp: this.transformTempInCelsius(inThreeHoursObj.main.temp)
-          };
-          
-          var inSixHoursObj = res.list[2];
-          var inSixHours = {
-            time: inSixHoursObj.dt_txt.split(' ')[1].substr(0, 5),
-            icon: this.getWeatherIconUrl(inSixHoursObj.weather[0].icon),
-            temp: this.transformTempInCelsius(inSixHoursObj.main.temp)
-          };
-          
-          this.setState({
-            forecastWeather: {
-              inOneHour,
-              inThreeHours,
-              inSixHours
-            }
-          });
-        }
-      }.bind(this)
-    });
-  }
-  
-  // Get the URL for the weather icon
-  getWeatherIconUrl(icon) {
-    return WEATHER_ICON_URL + icon + '.png';
-  }
-  
-  // Transform the temperature from Kelvin into Celsius
-  transformTempInCelsius(temp) {
-    return Math.floor(temp - 273.15);
   }
 
   // Load the current weather when the component will mount
@@ -173,39 +77,106 @@ class Weather extends React.Component {
     clearInterval(this.state.forecastWeatherInterval);
   }
 
+  // Load the current weather
+  loadCurrentWeather() {
+    const { apiKey, location } = this.props;
+    const url = CURRENT_WEATHER_URL + location + '&APPID=' + apiKey;
+
+    jquery.get({
+      url: url,
+      success: function(res) {
+        if (res) {
+          this.setState({
+            currentWeather: {
+              description: res.weather[0].description,
+              id: res.weather[0].id,
+              temp: Math.floor(res.main.temp)
+            }
+          });
+        }
+      }.bind(this)
+    });
+  }
+
+  // Load the forecast weather
+  loadForecastWeather() {
+    const { apiKey, location } = this.props;
+    const url = FORECAST_WEATHER_URL + location + '&APPID=' + apiKey;
+
+    jquery.get({
+      url: url,
+      success: function(res) {
+        if (res) {
+          let forecastWeather1 = {
+            date: res.list[1].dt,
+            id: res.list[1].weather[0].id,
+            tempMax: Math.floor(res.list[1].temp.max),
+            tempMin: Math.floor(res.list[1].temp.min)
+          };
+
+          let forecastWeather2 = {
+            date: res.list[2].dt,
+            id: res.list[2].weather[0].id,
+            tempMax: Math.floor(res.list[2].temp.max),
+            tempMin: Math.floor(res.list[2].temp.min)
+          };
+
+          let forecastWeather3 = {
+            date: res.list[3].dt,
+            id: res.list[3].weather[0].id,
+            tempMax: Math.floor(res.list[3].temp.max),
+            tempMin: Math.floor(res.list[3].temp.min)
+          };
+
+          this.setState({
+            forecastWeather: [
+              forecastWeather1,
+              forecastWeather2,
+              forecastWeather3
+            ]
+          });
+        }
+      }.bind(this)
+    });
+  }
+
   // Render the component
   render() {
     const { location } = this.props;
     const { currentWeather, forecastWeather } = this.state;
 
     return(
-      <div>
-        <h1>
-          <Row>
-            <Col xs={6}>
-              { currentWeather.temp } <WeatherIcons name='celsius' /> <WeatherIcons name='thermometer' />
-            </Col>
-            <Col xs={6}>
-              { currentWeather.humidity } <WeatherIcons name='humidity'/>
-            </Col>
-          </Row>
-        </h1>
-        <h3>
-          <Row>
-            <Col xs={4}>
-              <WeatherForecast forecastWeather={ forecastWeather.inOneHour } />
-            </Col>
-            <Col xs={4}>
-              <WeatherForecast forecastWeather={ forecastWeather.inThreeHours } />
-            </Col>
-            <Col xs={4}>
-              <WeatherForecast forecastWeather={ forecastWeather.inSixHours } />
-            </Col>
-          </Row>
-          <Row>
-            <small>{ location }</small>
-          </Row>
-        </h3>
+      <div className='weather'>
+        <div className='weather-temp'>
+          <div className='weather-temp-value'>
+            { currentWeather.temp }
+          </div>
+          <WeatherIcons
+            className='weather-temp-celsius'
+            name='celsius'
+            />
+        </div>
+        <WeatherIcons
+            className='weather-icon'
+            name={ 'owm-day-' + currentWeather.id }
+            />
+        <div className='weather-description'>
+          { currentWeather.description }
+        </div>
+        <div className='weather-forecast'>
+          { forecastWeather.map(function(forecastWeather, index) {
+            return (
+              <WeatherForecast
+                key={ 'forecast-weather-' + index }
+                forecastWeather={ forecastWeather }
+                index={ index }
+                />
+            );
+          }) }
+        </div>
+        <div className='weather-location'>
+          { location }
+        </div>
       </div>
     );
   }

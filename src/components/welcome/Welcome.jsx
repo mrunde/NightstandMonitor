@@ -60,10 +60,10 @@ class Welcome extends React.Component {
 
   // Get the greeting for the daytime
   setGreeting() {
-    var currentDate = new Date();
-    var currentHours = currentDate.getHours();
+    let now = new Date();
+    let currentHours = now.getHours();
 
-    var greeting;
+    let greeting;
     if (currentHours < DAYTIME.NIGHT) {
       greeting = GREETINGS.NIGHT;
     } else if (currentHours < DAYTIME.MORNING) {
@@ -85,9 +85,11 @@ class Welcome extends React.Component {
     const { greeting } = this.state;
 
     return(
-      <h1>
-        { greeting + ', ' + name }
-      </h1>
+      <div className='welcome'>
+        <span className='welcome-greeting'>
+          { greeting + ', ' + name }
+        </span>
+      </div>
     );
   }
 }
